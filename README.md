@@ -12,12 +12,13 @@ NODE_ENV=development node index.js
 
 By changing the enviroment, you can change the context and subsequent configuration.
 
-development - App uses port 3000 and selects the SQL Lite3 DB settings.
-production - App uses port 8080 and selects the Postgres DB settings.
+`development` - App uses port `3000` and selects the SQL Lite3 DB settings.
+
+`production` - App uses port `8080` and selects the Postgres DB settings.
 
 # Features
 
-We currently have a fake test feature flag 'ENFORCE_CAP_LIMIT' is set to true by default but gets modified based on the dynamic context.
+We currently have a fake test feature flag `ENFORCE_CAP_LIMIT` is set to true by default but gets modified based on the dynamic context.
 
 # Test Endpoints
 In order to see the static content, visit:
