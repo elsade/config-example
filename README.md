@@ -18,9 +18,17 @@ By changing the enviroment, you can change the context and subsequent configurat
 
 # Features
 
-We currently have a fake test feature flag `ENFORCE_CAP_LIMIT` is set to true by default but gets modified based on the dynamic context.
+We currently have a fake test feature flag `ENFORCE_CAP_LIMIT` is set to true by default but gets disabled based by the dynamic context for internal users.
 
 # Test Endpoints
+
+Here are some demo endpoints:
+
+- /static_context - display the static context following bootup
+- /static_config - display the static configuration derived from the static context
+- /dynamic_context - display the dynamic context based on the real-time request
+- /dynamic_config - display the dynamic configuration derived from the dynamic context
+
 In order to see the static content, visit:
 ````
 curl http://localhost:3000/static_context | jq
