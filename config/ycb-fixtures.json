@@ -1,0 +1,24 @@
+[
+  {
+    "settings": ["master"],
+    "lang": "en-US",
+    "internal": false
+  },
+  {
+    "settings": ["colocation:east,west"],
+    "timeout": 1000
+  },
+  {
+    "settings": ["colocation:eu"],
+    "timeout": 3000
+  },
+  {
+    "settings": ["colocation:ap"],
+    "timeout": 500
+  },
+  {
+    "settings": ["bucket:internal"],
+    "ENFORCE_CAP_LIMIT": false,
+    "internal": true
+  }
+]

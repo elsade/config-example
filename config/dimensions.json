@@ -1,0 +1,35 @@
+[
+  {
+    "environment": {
+      "development": null,
+      "staging": null,
+      "production": null
+    }
+  },
+  {
+    "colocation": {
+      "east": null,
+      "west": null,
+      "ap": null,
+      "eu": null
+    }
+  },
+  {
+    "language": {
+      "en-US": null,
+      "ko-KR": null
+    }
+  },
+  {
+    "device": {
+      "web": null,
+      "mobile": null,
+      "tv": null
+    }
+  },
+  {
+    "bucket": {
+      "internal": null
+    }
+  }
+]
