@@ -1,5 +1,5 @@
-let _ = require('lodash')
-let ycb = require('ycb');
+const _ = require('lodash')
+const ycb = require('ycb')
 
 const setBucketInternal = (req, dynamicContext) => {
     // enabled internal override for '@sixfivelabs.com' users
@@ -12,6 +12,10 @@ const setBucketInternal = (req, dynamicContext) => {
     }
 }
 
+const logLevelContext = (req, dynamicContext) => {
+    dynamicContext.logLevel = req.headers['log-level']
+}
+
 module.exports = function createContextualizer( options ) {
     return function contextualizer(req, res, next) {
 
@@ -22,6 +26,8 @@ module.exports = function createContextualizer( options ) {
         }
 
         setBucketInternal(req, dynamicContext)
+
+        logLevelContext(req, dynamicContext)
 
         // append the full context to the request
         req.context = Object.freeze(_.assign({}, staticContext, dynamicContext))

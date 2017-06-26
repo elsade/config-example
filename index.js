@@ -1,5 +1,6 @@
 const _ = require('lodash')
-const ycb = require('ycb');
+const ycb = require('ycb')
+const util = require('util')
 
 const features = require('./config/features.json')
 const initialConfig = require('config')
@@ -11,10 +12,10 @@ const ycbUtils = require('./lib/ycb-utils')
 const ycbConfigArray = ycbUtils(initialConfig)
 const ycbObj = new ycb.Ycb(ycbConfigArray)
 
-// dimensions
+// initial dimensions
 const staticContext = Object.freeze({
     environment: process.env.NODE_ENV  || 'development',
-    colocation: process.env.colocation || 'west'
+    colocation: process.env.COLOCATION || 'west'
 })
 
 let staticConfig = Object.freeze(_.assign(features, ycbObj.read(staticContext)))
@@ -41,6 +42,7 @@ app.get('/static_config', function (req, res) {
 })
 
 app.get('/dynamic_config', function (req, res) {
+    console.log(`log_level: ${req.config.logLevel}, /dynamic_config ${util.inspect(req.config)}`)
     res.json(req.config)
 })
 

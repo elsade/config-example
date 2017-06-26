@@ -1,7 +1,7 @@
 /* global describe, it, expect, beforeEach, spyOn */
 
 let ycb = require('ycb');
-let dimensions = require('./config/dimensions.json')
+let dimensions = require('./config/ycb-config/dimensions.json')
 
 let configArray = [
     {

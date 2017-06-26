@@ -2,7 +2,8 @@
   {
     "settings": ["master"],
     "lang": "en-US",
-    "internal": false
+    "internal": false,
+    "logLevel": "test"
   },
   {
     "settings": ["colocation:east,west"],
@@ -20,5 +21,13 @@
     "settings": ["bucket:internal"],
     "ENFORCE_CAP_LIMIT": false,
     "internal": true
+  },
+  {
+    "settings": ["logLevel:error"],
+    "logLevel": "error"
+  },
+  {
+    "settings": ["logLevel:debug"],
+    "logLevel": "debug"
   }
 ]
