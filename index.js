@@ -14,8 +14,8 @@ const ycbObj = new ycb.Ycb(ycbConfigArray)
 
 // initial dimensions
 const staticContext = Object.freeze({
-    environment: process.env.NODE_ENV  || 'development',
-    colocation: process.env.COLOCATION || 'west'
+  environment: process.env.NODE_ENV || 'development',
+  colocation: process.env.COLOCATION || 'west'
 })
 
 let staticConfig = Object.freeze(_.assign(features, ycbObj.read(staticContext)))
@@ -23,29 +23,29 @@ let staticConfig = Object.freeze(_.assign(features, ycbObj.read(staticContext)))
 const express = require('express')
 const app = express()
 
-app.use(contextualizer({ staticContext, staticConfig, ycbConfigArray}))
+app.use(contextualizer({ staticContext, staticConfig, ycbConfigArray }))
 
 app.get('/', function (req, res) {
-    res.json(staticContext)
+  res.json(staticContext)
 })
 
 app.get('/static_context', function (req, res) {
-    res.json(staticContext)
+  res.json(staticContext)
 })
 
 app.get('/dynamic_context', function (req, res) {
-    res.json(req.context)
+  res.json(req.context)
 })
 
 app.get('/static_config', function (req, res) {
-    res.json(staticConfig)
+  res.json(staticConfig)
 })
 
 app.get('/dynamic_config', function (req, res) {
-    console.log(`log_level: ${req.config.logLevel}, /dynamic_config ${util.inspect(req.config)}`)
-    res.json(req.config)
+  console.log(`log_level: ${req.config.logLevel}, /dynamic_config ${util.inspect(req.config)}`)
+  res.json(req.config)
 })
 
 app.listen(staticConfig.appPort, function () {
-    console.log(`Config prototype app listening on port ${staticConfig.appPort}`)
+  console.log(`Config prototype app listening on port ${staticConfig.appPort}`)
 })

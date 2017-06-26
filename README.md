@@ -10,7 +10,7 @@ NODE_ENV=development node index.js
 
 # Environments
 
-By changing the enviroment, you can change the context and subsequent configuration.
+By changing the environment, you can change the context and subsequent configuration.
 
 `development` - App uses port `3000` and selects the SQL Lite3 DB settings.
 
