@@ -11,19 +11,13 @@ const ycbUtils = require('./lib/ycb-utils')
 const ycbConfigArray = ycbUtils(initialConfig)
 const ycbObj = new ycb.Ycb(ycbConfigArray)
 
-console.log('initialConfig: ', initialConfig);
-
 // dimensions
 const staticContext = Object.freeze({
-    environment: process.env.NODE_ENV,
-    colocation: process.env.colocation
+    environment: process.env.NODE_ENV  || 'development',
+    colocation: process.env.colocation || 'west'
 })
 
-console.log('static context: ', staticContext);
-
 let staticConfig = Object.freeze(_.assign(features, ycbObj.read(staticContext)))
-
-console.log('computed config: ', staticConfig);
 
 const express = require('express')
 const app = express()
