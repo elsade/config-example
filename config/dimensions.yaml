@@ -1,0 +1,23 @@
+---
+- language:
+    en-US:
+    ko-KR:
+- device:
+    web:
+    mobile:
+    tv:
+- bucket:
+    internal:
+- logLevel:
+    error:
+    debug:
+    info:
+- colocation:
+    us-east-1:
+    us-west-1:
+    ap-northeast-2:
+    eu-west-2:
+- environment:
+    development:
+    staging:
+    production:

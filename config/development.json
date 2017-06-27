@@ -1,9 +1,0 @@
-{
-  "appPort": 3000,
-  "client": "sqlite3",
-  "connection": {
-    "filename": "./dev.sqlite3"
-  },
-  "logLevel": "debug",
-  "cap_limit": 0
-}

@@ -1,0 +1,43 @@
+---
+- settings:
+  - master
+  lang: en-US
+  internal: false
+  logLevel: debug
+  feature_enforce_cap_limit: true
+  cap_limit: 0
+- settings:
+  - environment:development
+  appPort: 3000
+  client: sqlite3
+  connection_filename: "./dev.sqlite3"
+- settings:
+  - environment:production
+  appPort: 8080
+  client: postgresql
+  connection_database: my_db
+  connection_user: username
+  connection_password: password
+  pool_min: 2
+  pool_max: 10
+  migrations_tableName: knex_migrations
+  logLevel: error
+- settings:
+  - colocation:us-east-1,us-west-1
+  timeout: 1000
+- settings:
+  - colocation:eu-west-2
+  timeout: 3000
+- settings:
+  - colocation:ap-northeast-2
+  timeout: 500
+- settings:
+  - bucket:internal
+  feature_enforce_cap_limit: false
+  internal: true
+- settings:
+  - logLevel:error
+  logLevel: error
+- settings:
+  - logLevel:debug
+  logLevel: debug

@@ -39,7 +39,7 @@ resulting in
 ````
 {
   "environment": "development",
-  "colocation": "west"
+  "colocation": "us-west-1"
 }
 ````
 
@@ -52,17 +52,15 @@ resulting in
 
 ````
 {
-  "ENFORCE_CAP_LIMIT": true,
   "lang": "en-US",
   "internal": false,
-  "timeout": 1000,
   "logLevel": "debug",
+  "feature_enforce_cap_limit": true,
+  "cap_limit": 0,
   "appPort": 3000,
   "client": "sqlite3",
-  "connection": {
-    "filename": "./dev.sqlite3"
-  },
-  "cap_limit": 0
+  "connection_filename": "./dev.sqlite3",
+  "timeout": 1000
 }
 ````
 
@@ -77,7 +75,7 @@ resulting in
 ````
 {
   "environment": "development",
-  "colocation": "west",
+  "colocation": "us-west-1",
   "bucket": [
     "internal"
   ]
@@ -94,17 +92,15 @@ resulting in
 
 ````
 {
-  "ENFORCE_CAP_LIMIT": false,
   "lang": "en-US",
   "internal": true,
-  "timeout": 1000,
   "logLevel": "debug",
+  "feature_enforce_cap_limit": false,
+  "cap_limit": 0,
   "appPort": 3000,
   "client": "sqlite3",
-  "connection": {
-    "filename": "./dev.sqlite3"
-  },
-  "cap_limit": 0
+  "connection_filename": "./dev.sqlite3",
+  "timeout": 1000
 }
 
 ````

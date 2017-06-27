@@ -3,7 +3,7 @@
     "settings": ["master"],
     "lang": "en-US",
     "internal": false,
-    "logLevel": "test"
+    "logLevel": "error"
   },
   {
     "settings": ["colocation:east,west"],
@@ -27,7 +27,8 @@
     "logLevel": "error"
   },
   {
-    "settings": ["logLevel:debug"],
+    "settings": ["logLevel:debug"]
+  ,
     "logLevel": "debug"
   }
 ]

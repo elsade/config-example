@@ -1,40 +1,27 @@
 const _ = require('lodash')
-const ycb = require('ycb')
 const util = require('util')
 
-const features = require('./config/features.json')
-const initialConfig = require('config')
+const ycbConfig = require('./lib/ycb-config')()
 
 const contextualizer = require('./middleware/contextualizer')
-const ycbUtils = require('./lib/ycb-utils')
 
-// create the initial ycb configuration array
-const ycbConfigArray = ycbUtils(initialConfig)
-const ycbObj = new ycb.Ycb(ycbConfigArray)
-
-// initial dimensions
-const staticContext = Object.freeze({
-  environment: process.env.NODE_ENV || 'development',
-  colocation: process.env.COLOCATION || 'west'
-})
-
-let staticConfig = Object.freeze(_.assign(features, ycbObj.read(staticContext)))
+let staticConfig = ycbConfig.getConfig()
 
 const express = require('express')
 const app = express()
 
-app.use(contextualizer({ staticContext, staticConfig, ycbConfigArray }))
+app.use(contextualizer({ ycbConfig }))
 
 app.get('/', function (req, res) {
-  res.json(staticContext)
+  res.json(ycbConfig.getContext())
 })
 
 app.get('/static_context', function (req, res) {
-  res.json(staticContext)
+  res.json(ycbConfig.getContext())
 })
 
 app.get('/dynamic_context', function (req, res) {
-  res.json(req.context)
+  res.json(req.__context)
 })
 
 app.get('/static_config', function (req, res) {

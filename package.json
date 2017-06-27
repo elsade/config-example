@@ -4,13 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "NODE_ENV=production pool_max=20 node index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "config": "1.26.1",
     "express": "4.15.3",
+    "js-yaml": "3.8.4",
     "lodash": "4.17.4",
     "ycb": "1.5.5"
   },
