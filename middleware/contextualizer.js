@@ -1,4 +1,5 @@
-const pick = require('lodash.pick')
+const applyEnvironmentVariableOverrides = require('../lib/environment-config')
+
 const setBucketInternalContext = (req, dynamicContext) => {
   // enabled internal override for '@sixfivelabs.com' users
   const {username} = req.headers
@@ -14,16 +15,6 @@ const setBucketInternalContext = (req, dynamicContext) => {
 const setLogLevelContext = (req, dynamicContext) => {
   dynamicContext.logLevel = req.headers['log-level']
   return dynamicContext
-}
-
-const applyEnvironmentVariableOverrides = (config) => {
-  // replace existing values in the config with those set using environmental variables
-  let configKeys = Object.keys(config)
-
-  // grab the list of keys that exist in both sources
-  let intersection = Object.keys(process.env).filter(key => configKeys.includes(key))
-  let configFromEnv = pick(process.env, intersection)
-  return Object.assign(config, configFromEnv)
 }
 
 const reduceContext = (req) => {
