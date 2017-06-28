@@ -1,5 +1,4 @@
-const _ = require('lodash')
-
+const pick = require('lodash.pick')
 const setBucketInternalContext = (req, dynamicContext) => {
   // enabled internal override for '@sixfivelabs.com' users
   const {username} = req.headers
@@ -19,21 +18,23 @@ const setLogLevelContext = (req, dynamicContext) => {
 
 const applyEnvironmentVariableOverrides = (config) => {
   // replace existing values in the config with those set using environmental variables
-  let intersection = _.intersection(Object.keys(config), Object.keys(process.env))
-  return _.assign(config, _.pick(process.env, intersection))
+  let configKeys = Object.keys(config)
+
+  // grab the list of keys that exist in both sources
+  let intersection = Object.keys(process.env).filter(key => configKeys.includes(key))
+  let configFromEnv = pick(process.env, intersection)
+  return Object.assign(config, configFromEnv)
 }
 
-const reduceDynamicContext = (req) => {
+const reduceContext = (req) => {
   const subcontextualizers = [
     setBucketInternalContext,
     setLogLevelContext
   ]
   // apply each of the functions that mutate the context and reduce to a single context
-  return subcontextualizers.reduce((prev, subcontextualizer) => {
-    return subcontextualizer(req, prev)
-  }, {
-    bucket: []
-  })
+  return subcontextualizers.reduce((prev, func) => {
+    return func(req, prev)
+  }, { bucket: [] })
 }
 
 module.exports = function createContextualizer (options) {
@@ -41,12 +42,12 @@ module.exports = function createContextualizer (options) {
     const { ycbConfig } = options
     const dynamicYcbObject = ycbConfig.getYcbObject()
     const staticContext = ycbConfig.getContext()
-    let dynamicContext = reduceDynamicContext(req)
+    let dynamicContext = reduceContext(req)
 
     // append the full context to the request
-    dynamicContext = Object.freeze(_.assign({}, staticContext, dynamicContext))
+    dynamicContext = Object.freeze(Object.assign({}, staticContext, dynamicContext))
 
-    // TODO::AG-Remove this once testing is complete
+    // TODO::AG-this should be removed once initial testing is done
     req.__context = dynamicContext
 
     let dynamicConfig = dynamicYcbObject.read(dynamicContext)

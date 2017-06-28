@@ -1,7 +1,4 @@
 /* global describe, it, expect, beforeEach, spyOn */
-const _ = require('lodash')
-
-// import module under test here
 const ycbConfig = require('../../lib/ycb-config')
 const contextualizer = require('../contextualizer')
 
@@ -73,8 +70,7 @@ describe('contextualizer test suite', () => {
     )
   })
   it('contextualizer req contains headers ', () => {
-    let context = {
-    };
+    let context = {}
     const ycbConfigInstance = ycbConfig({context})
 
     const staticContext = ycbConfigInstance.getContext()
@@ -90,7 +86,7 @@ describe('contextualizer test suite', () => {
         'log-level': 'error'
       }
     }
-    contextualizerMiddleware(req, {}, () => {})
+    contextualizerMiddleware(req, {}, () => undefined)
     expect(req.config).toEqual({ lang: 'en-US',
       internal: true,
       logLevel: 'error',
